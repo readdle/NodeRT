@@ -50,8 +50,7 @@
         "msvs_settings": {
           "VCCLCompilerTool": {
             "AdditionalUsingDirectories": [
-              "%ProgramFiles(x86)%/Microsoft Visual Studio 14.0/VC/lib/store/references",
-              "%ProgramFiles%/Microsoft Visual Studio 14.0/VC/lib/store/references"
+              "$(VCToolsInstallDir)lib/x86/store/references"
             ]
           }
         }
