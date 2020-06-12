@@ -751,7 +751,7 @@ namespace NodeRTLib
                 return TypeCheck(type.GetGenericArguments()[0], TX.MainModel.Types.ContainsKey(type.GetGenericArguments()[0]));
             }
 
-            if (type == typeof(Guid))
+            if (type == typeof(Guid) || type == typeof(Guid).MakeByRefType())
             {
                 return "NodeRT::Utils::IsGuid({0})";
             }

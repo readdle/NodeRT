@@ -53,12 +53,12 @@
           @:
           }
           if (Model.Overloads[0].ReturnType == typeof(void)) {
-          @:@(TX.ToWinRT(Model.Overloads[0].DeclaringType, false))::@(TX.CSharpMethodToCppMethod(overload.Name))(@{int j=0;foreach(var paramInfo in overload.GetParameters()){if(j>0)@(", "); if (paramInfo.ParameterType.IsByRef){@("&")} @("arg" + j.ToString()); j++;}});
+          @:@(TX.ToWinRT(Model.Overloads[0].DeclaringType, false))::@(TX.CSharpMethodToCppMethod(overload.Name))(@{int j=0;foreach(var paramInfo in overload.GetParameters()){if(j>0)@(", "); @("arg" + j.ToString()); j++;}});
           } else {
           var winrtConversionInfo = Converter.ToWinRT(overload.ReturnType, TX.MainModel.Types.ContainsKey(overload.ReturnType));
           @:@(winrtConversionInfo[0]) result;
             var jsConversionInfo = Converter.ToJS(overload.ReturnType, TX.MainModel.Types.ContainsKey(overload.ReturnType));
-          @:result = @(TX.ToWinRT(overload.DeclaringType, false))::@(TX.CSharpMethodToCppMethod(overload.Name))(@{int j=0;foreach(var paramInfo in overload.GetParameters()){if(j>0)@(", "); if (paramInfo.ParameterType.IsByRef){@("&")} @("arg" + j.ToString()); j++;}});
+          @:result = @(TX.ToWinRT(overload.DeclaringType, false))::@(TX.CSharpMethodToCppMethod(overload.Name))(@{int j=0;foreach(var paramInfo in overload.GetParameters()){if(j>0)@(", "); @("arg" + j.ToString()); j++;}});
           }
 
           if (methodHasOutParams)
