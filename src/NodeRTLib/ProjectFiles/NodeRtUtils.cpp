@@ -683,6 +683,410 @@ bool IsSize(Local<Value> value) {
   return true;
 }
 
+Local<Object> Matrix4x4ToJs(::Windows::Foundation::Numerics::float4x4 matrix) {
+    EscapableHandleScope scope;
+
+    Local<Object> obj = Nan::New<Object>();
+
+    Nan::Set(obj, Nan::New<String>("m11").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m11)));
+    Nan::Set(obj, Nan::New<String>("m12").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m12)));
+    Nan::Set(obj, Nan::New<String>("m13").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m13)));
+    Nan::Set(obj, Nan::New<String>("m14").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m14)));
+    Nan::Set(obj, Nan::New<String>("m21").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m21)));
+    Nan::Set(obj, Nan::New<String>("m22").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m22)));
+    Nan::Set(obj, Nan::New<String>("m23").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m23)));
+    Nan::Set(obj, Nan::New<String>("m24").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m24)));
+    Nan::Set(obj, Nan::New<String>("m31").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m31)));
+    Nan::Set(obj, Nan::New<String>("m32").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m32)));
+    Nan::Set(obj, Nan::New<String>("m33").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m33)));
+    Nan::Set(obj, Nan::New<String>("m34").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m34)));
+    Nan::Set(obj, Nan::New<String>("m41").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m41)));
+    Nan::Set(obj, Nan::New<String>("m42").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m42)));
+    Nan::Set(obj, Nan::New<String>("m43").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m43)));
+    Nan::Set(obj, Nan::New<String>("m44").ToLocalChecked(), Nan::New<Number>(static_cast<double>(matrix.m44)));
+
+    return scope.Escape(obj);
+}
+
+::Windows::Foundation::Numerics::float4x4 Matrix4x4FromJs(Local<Value> value) {
+    HandleScope scope;
+    ::Windows::Foundation::Numerics::float4x4 matrix = ::Windows::Foundation::Numerics::float4x4();
+
+    if (!value->IsObject()) {
+        Nan::ThrowError(Nan::TypeError(NodeRT::Utils::NewString(L"Unexpected type, expected an object")));
+        return matrix;
+    }
+
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+    Local<String> symbol;
+
+    symbol = Nan::New<String>("m11").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m11 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m12").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m12 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m13").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m13 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m14").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m14 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m21").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m21 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m22").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m22 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m23").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m23 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m24").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m24 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m31").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m31 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m32").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m32 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m33").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m33 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m34").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m34 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m41").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m41 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m42").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m42 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m43").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m43 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("m44").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        matrix.m44 = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    return matrix;
+}
+
+bool IsMatrix4x4(Local<Value> value) {
+    if (!value->IsObject()) {
+        return false;
+    }
+
+    Local<String> symbol;
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+
+    symbol = Nan::New<String>("m11").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m12").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m13").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m14").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m21").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m22").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m23").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m24").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m31").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m32").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m33").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m34").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m41").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m42").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m43").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("m44").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+Local<Object> Vector3ToJs(::Windows::Foundation::Numerics::float3 vector) {
+    EscapableHandleScope scope;
+
+    Local<Object> obj = Nan::New<Object>();
+
+    Nan::Set(obj, Nan::New<String>("x").ToLocalChecked(), Nan::New<Number>(static_cast<double>(vector.x)));
+    Nan::Set(obj, Nan::New<String>("y").ToLocalChecked(), Nan::New<Number>(static_cast<double>(vector.y)));
+    Nan::Set(obj, Nan::New<String>("z").ToLocalChecked(), Nan::New<Number>(static_cast<double>(vector.z)));
+
+    return scope.Escape(obj);
+}
+
+::Windows::Foundation::Numerics::float3 Vector3FromJs(Local<Value> value) {
+    HandleScope scope;
+    ::Windows::Foundation::Numerics::float3 vector = ::Windows::Foundation::Numerics::float3();
+
+    if (!value->IsObject()) {
+        Nan::ThrowError(Nan::TypeError(NodeRT::Utils::NewString(L"Unexpected type, expected an object")));
+        return vector;
+    }
+
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+    Local<String> symbol;
+
+    symbol = Nan::New<String>("x").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        vector.x = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("y").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        vector.y = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("z").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        vector.z = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    return vector;
+}
+
+bool IsVector3(Local<Value> value) {
+    if (!value->IsObject()) {
+        return false;
+    }
+
+    Local<String> symbol;
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+
+    symbol = Nan::New<String>("x").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("y").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("z").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+Local<Object> QuaternionToJs(::Windows::Foundation::Numerics::quaternion quaternion) {
+    EscapableHandleScope scope;
+
+    Local<Object> obj = Nan::New<Object>();
+
+    Nan::Set(obj, Nan::New<String>("x").ToLocalChecked(), Nan::New<Number>(static_cast<double>(quaternion.x)));
+    Nan::Set(obj, Nan::New<String>("y").ToLocalChecked(), Nan::New<Number>(static_cast<double>(quaternion.y)));
+    Nan::Set(obj, Nan::New<String>("z").ToLocalChecked(), Nan::New<Number>(static_cast<double>(quaternion.z)));
+    Nan::Set(obj, Nan::New<String>("w").ToLocalChecked(), Nan::New<Number>(static_cast<double>(quaternion.w)));
+
+    return scope.Escape(obj);
+}
+
+::Windows::Foundation::Numerics::quaternion QuaternionFromJs(Local<Value> value) {
+    HandleScope scope;
+    ::Windows::Foundation::Numerics::quaternion quaternion = ::Windows::Foundation::Numerics::quaternion();
+
+    if (!value->IsObject()) {
+        Nan::ThrowError(Nan::TypeError(NodeRT::Utils::NewString(L"Unexpected type, expected an object")));
+        return quaternion;
+    }
+
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+    Local<String> symbol;
+
+    symbol = Nan::New<String>("x").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        quaternion.x = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("y").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        quaternion.y = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("z").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        quaternion.z = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    symbol = Nan::New<String>("w").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        quaternion.w = static_cast<float>(Nan::To<double>(Nan::Get(obj, symbol).ToLocalChecked()).FromMaybe(0.0));
+    }
+
+    return quaternion;
+}
+
+bool IsQuaternion(Local<Value> value) {
+    if (!value->IsObject()) {
+        return false;
+    }
+
+    Local<String> symbol;
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+
+    symbol = Nan::New<String>("x").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("y").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("z").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    symbol = Nan::New<String>("w").ToLocalChecked();
+    if (Nan::Has(obj, symbol).FromMaybe(false)) {
+        if (!Nan::Get(obj, symbol).ToLocalChecked()->IsNumber()) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 wchar_t GetFirstChar(Local<Value> value) {
   wchar_t retVal = 0;
 

@@ -187,6 +187,21 @@ namespace NodeRTLib
                 return new[] { "Object", "NodeRT::Utils::SizeToJs({0})" };
             }
 
+            if (type.FullName == "System.Numerics.Vector3")
+            {
+                return new[] { "Object", "NodeRT::Utils::Vector3ToJs({0})" };
+            }
+
+            if (type.FullName == "System.Numerics.Matrix4x4")
+            {
+                return new[] { "Object", "NodeRT::Utils::Matrix4x4ToJs({0})" };
+            }
+
+            if (type.FullName == "System.Numerics.Quaternion")
+            {
+                return new[] { "Object", "NodeRT::Utils::QuaternionToJs({0})" };
+            }
+
             if (type.IsEnum)
             {
                 return new[] { "Integer", "Nan::New<Integer>(static_cast<int>({0}))" };
@@ -641,6 +656,21 @@ namespace NodeRTLib
                 return new[] { "::Windows::Foundation::Size", "NodeRT::Utils::SizeFromJs({0})" };
             }
 
+            if (type.FullName == "System.Numerics.Vector3")
+            {
+                return new[] { "::Windows::Foundation::Numerics::float3", "NodeRT::Utils::Vector3FromJs({0})" };
+            }
+
+            if (type.FullName == "System.Numerics.Matrix4x4")
+            {
+                return new[] { "::Windows::Foundation::Numerics::float4x4", "NodeRT::Utils::Matrix4x4FromJs({0})" };
+            }
+
+            if (type.FullName == "System.Numerics.Quaternion")
+            {
+                return new[] { "::Windows::Foundation::Numerics::quaternion", "NodeRT::Utils::QuaternionFromJs({0})" };
+            }
+
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 var genericArgConversionInfo = ToWinRT(type.GetGenericArguments()[0]);
@@ -744,6 +774,21 @@ namespace NodeRTLib
             if (type.FullName == "Windows.Foundation.Rect")
             {
                 return "NodeRT::Utils::IsRect({0})";
+            }
+
+            if (type.FullName == "System.Numerics.Vector3")
+            {
+                return "NodeRT::Utils::IsVector3({0})";
+            }
+
+            if (type.FullName == "System.Numerics.Matrix4x4")
+            {
+                return "NodeRT::Utils::IsMatrix4x4({0})";
+            }
+
+            if (type.FullName == "System.Numerics.Quaternion")
+            {
+                return "NodeRT::Utils::IsQuaternion({0})";
             }
 
             if (type.IsEnum)

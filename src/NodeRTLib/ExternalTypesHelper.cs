@@ -28,6 +28,7 @@ namespace NodeRTLib
         {
             "System",
             "System.Collections",
+            "System.Numerics",
             "Platform",
             "Windows.Foundation.Collections"
         };
@@ -52,7 +53,7 @@ namespace NodeRTLib
             }
 
             if (IsValueTypeNoEnumOrPrimitve(type) && !valueTypes.Contains(type) &&
-                type.Namespace != "System" && type.Namespace != declaringTypeNamespace)
+                type.Namespace != "System" && type.Namespace != "System.Numerics" && type.Namespace != declaringTypeNamespace)
             {
                 valueTypes.Add(type);
             }

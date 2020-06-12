@@ -130,6 +130,18 @@ v8::Local<v8::Object> SizeToJs(::Windows::Foundation::Size size);
 ::Windows::Foundation::Size SizeFromJs(v8::Local<v8::Value> value);
 bool IsSize(v8::Local<v8::Value> value);
 
+v8::Local<v8::Object> Matrix4x4ToJs(::Windows::Foundation::Numerics::float4x4 matrix);
+::Windows::Foundation::Numerics::float4x4 Matrix4x4FromJs(v8::Local<v8::Value> value);
+bool IsMatrix4x4(v8::Local<v8::Value> value);
+
+v8::Local<v8::Object> Vector3ToJs(::Windows::Foundation::Numerics::float3 vector);
+::Windows::Foundation::Numerics::float3 Vector3FromJs(v8::Local<v8::Value> value);
+bool IsVector3(v8::Local<v8::Value> value);
+
+v8::Local<v8::Object> QuaternionToJs(::Windows::Foundation::Numerics::quaternion quaternion);
+::Windows::Foundation::Numerics::quaternion QuaternionFromJs(v8::Local<v8::Value> value);
+bool IsQuaternion(v8::Local<v8::Value> value);
+
 wchar_t GetFirstChar(v8::Local<v8::Value> value);
 v8::Local<v8::String> JsStringFromChar(wchar_t value);
 
