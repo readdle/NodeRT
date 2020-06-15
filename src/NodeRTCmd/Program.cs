@@ -60,7 +60,7 @@ namespace NodeRTCmd
             string ns = ValueOrNull(argsDictionary, "namespace");
             string customWinMdDir = ValueOrNull(argsDictionary, "customwinmddir");
 
-            VsVersions vsVersion = VsVersions.Vs2017;
+            VsVersions vsVersion = VsVersions.Vs2019;
             WinVersions winVersion = WinVersions.v10;
 
             if (argsDictionary.ContainsKey("vs"))
